@@ -1,0 +1,364 @@
+USE [FSean]
+GO
+
+/****** Object:  Table [dbo].[Roles]    Script Date: 11/7/2019 10:57:18 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Roles](
+	[iId] [int] IDENTITY(1,1) NOT NULL,
+	[vRol] [varchar](50) NULL,
+ CONSTRAINT [PK_Roles_1] PRIMARY KEY CLUSTERED 
+(
+	[iId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+----
+USE [FSean]
+GO
+
+/****** Object:  Table [dbo].[Usuario]    Script Date: 11/7/2019 10:56:55 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Usuario](
+	[iId] [int] IDENTITY(1,1) NOT NULL,
+	[iRol] [int] NULL,
+	[vUsuario] [varchar](200) NULL,
+	[vContraseña] [varchar](200) NULL,
+	[iIdRol] [int] NULL,
+	[vNombre] [varchar](200) NULL,
+	[vCorreo] [varchar](200) NULL,
+	[vIdentificacion] [varchar](200) NULL,
+	[dtFechaNacimiento] [datetime] NULL,
+	[iTelefono] [int] NULL,
+	[bAdmin] [int] NULL,
+ CONSTRAINT [PK_Usuario] PRIMARY KEY CLUSTERED 
+(
+	[iId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Usuario]  WITH CHECK ADD  CONSTRAINT [FK_Usuario_Usuario] FOREIGN KEY([iRol])
+REFERENCES [dbo].[Roles] ([iId])
+GO
+-------
+USE [FSean]
+GO
+
+/****** Object:  Table [dbo].[Equipo]    Script Date: 11/7/2019 10:58:43 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Equipo](
+	[iIdEquipo] [int] IDENTITY(1,1) NOT NULL,
+	[vInstitucion] [varchar](200) NULL,
+	[iPaqueteInscripcion] [int] NULL,
+ CONSTRAINT [PK_Equipo] PRIMARY KEY CLUSTERED 
+(
+	[iIdEquipo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+-------
+USE [FSean]
+GO
+
+/****** Object:  Table [dbo].[Participante]    Script Date: 11/7/2019 10:58:05 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Participante](
+	[iIdPartcipante] [int] IDENTITY(1,1) NOT NULL,
+	[iEquipo] [int] NULL,
+	[bEntrenador] [bit] NULL,
+ CONSTRAINT [PK_Participante] PRIMARY KEY CLUSTERED 
+(
+	[iIdPartcipante] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Participante]  WITH CHECK ADD  CONSTRAINT [FK_Participante_Equipo] FOREIGN KEY([iEquipo])
+REFERENCES [dbo].[Equipo] ([iIdEquipo])
+GO
+
+ALTER TABLE [dbo].[Participante] CHECK CONSTRAINT [FK_Participante_Equipo]
+GO
+----------
+USE [FSean]
+GO
+
+/****** Object:  Table [dbo].[Voluntario]    Script Date: 11/7/2019 10:59:38 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Voluntario](
+	[iId] [int] IDENTITY(1,1) NOT NULL,
+	[vLugarTrabajo] [varchar](200) NULL,
+	[vAreaConocimiento] [varchar](200) NULL,
+	[bAntiguedad] [bit] NULL,
+	[iRoles] [int] NULL,
+	[vExperienciaPasada] [varchar](500) NULL,
+	[vSugerencias] [varchar](500) NULL,
+	[vArea] [varchar](50) NULL,
+	[iCategoria] [int] NULL,
+	[vEncargado] [varchar](200) NULL,
+	[bJuez] [bit] NULL,
+ CONSTRAINT [PK_Voluntario] PRIMARY KEY CLUSTERED 
+(
+	[iId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+--------
+USE [FSean]
+GO
+
+/****** Object:  Table [dbo].[Capacitacion]    Script Date: 11/7/2019 11:00:08 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Capacitacion](
+	[iId] [int] IDENTITY(1,1) NOT NULL,
+	[vNombre] [varchar](200) NULL,
+	[vDescripcion] [varchar](200) NULL,
+	[dtFechaInicio] [datetime] NULL,
+	[dtFechaFinal] [datetime] NULL,
+ CONSTRAINT [PK_Capacitacion] PRIMARY KEY CLUSTERED 
+(
+	[iId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+-------
+USE [FSean]
+GO
+
+/****** Object:  Table [dbo].[CapacitacionxVoluntario]    Script Date: 11/7/2019 11:00:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[CapacitacionxVoluntario](
+	[iId] [int] IDENTITY(1,1) NOT NULL,
+	[iIdCapacitacion] [int] NULL,
+	[iIdVoluntario] [int] NULL,
+ CONSTRAINT [PK_CapacitacionxVoluntario] PRIMARY KEY CLUSTERED 
+(
+	[iId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[CapacitacionxVoluntario]  WITH CHECK ADD  CONSTRAINT [FK_CapacitacionxVoluntario_Capacitacion] FOREIGN KEY([iIdCapacitacion])
+REFERENCES [dbo].[Capacitacion] ([iId])
+GO
+
+ALTER TABLE [dbo].[CapacitacionxVoluntario] CHECK CONSTRAINT [FK_CapacitacionxVoluntario_Capacitacion]
+GO
+
+ALTER TABLE [dbo].[CapacitacionxVoluntario]  WITH CHECK ADD  CONSTRAINT [FK_CapacitacionxVoluntario_CapacitacionxVoluntario] FOREIGN KEY([iIdVoluntario])
+REFERENCES [dbo].[Voluntario] ([iId])
+GO
+
+ALTER TABLE [dbo].[CapacitacionxVoluntario] CHECK CONSTRAINT [FK_CapacitacionxVoluntario_CapacitacionxVoluntario]
+GO
+
+
+------
+USE [FSean]
+GO
+
+/****** Object:  Table [dbo].[Categoria]    Script Date: 11/7/2019 11:01:12 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Categoria](
+	[iId] [int] IDENTITY(1,1) NOT NULL,
+	[vNombre] [varchar](200) NULL,
+	[vDescripcion] [varchar](200) NULL,
+ CONSTRAINT [PK_Categoria] PRIMARY KEY CLUSTERED 
+(
+	[iId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+------
+USE [FSean]
+GO
+
+/****** Object:  Table [dbo].[CategoriaxEquipo]    Script Date: 11/7/2019 11:01:28 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[CategoriaxEquipo](
+	[iId] [int] IDENTITY(1,1) NOT NULL,
+	[iIdCategoria] [int] NOT NULL,
+	[iIdEquipo] [int] NOT NULL,
+ CONSTRAINT [PK_CategoriaxEquipo] PRIMARY KEY CLUSTERED 
+(
+	[iId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[CategoriaxEquipo]  WITH CHECK ADD  CONSTRAINT [FK_CategoriaxEquipo_Categoria] FOREIGN KEY([iIdCategoria])
+REFERENCES [dbo].[Categoria] ([iId])
+GO
+
+ALTER TABLE [dbo].[CategoriaxEquipo] CHECK CONSTRAINT [FK_CategoriaxEquipo_Categoria]
+GO
+
+ALTER TABLE [dbo].[CategoriaxEquipo]  WITH CHECK ADD  CONSTRAINT [FK_CategoriaxEquipo_Equipo] FOREIGN KEY([iIdEquipo])
+REFERENCES [dbo].[Equipo] ([iIdEquipo])
+GO
+
+ALTER TABLE [dbo].[CategoriaxEquipo] CHECK CONSTRAINT [FK_CategoriaxEquipo_Equipo]
+GO
+-------------
+USE [FSean]
+GO
+
+/****** Object:  Table [dbo].[Competencia]    Script Date: 11/7/2019 11:02:58 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Competencia](
+	[iId] [int] IDENTITY(1,1) NOT NULL,
+	[vDescripcion] [varchar](500) NULL,
+	[dtFechaInicio] [datetime] NULL,
+	[dtFechaFinal] [datetime] NULL,
+ CONSTRAINT [PK_Competencia] PRIMARY KEY CLUSTERED 
+(
+	[iId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+---------------------------
+USE [FSean]
+GO
+
+/****** Object:  Table [dbo].[EquipoxCompetencia]    Script Date: 11/7/2019 11:03:16 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[EquipoxCompetencia](
+	[iId] [int] NOT NULL,
+	[iIdEquipo] [int] NULL,
+	[iIdCompetencia] [int] NULL,
+ CONSTRAINT [PK_EquipoxCompetencia] PRIMARY KEY CLUSTERED 
+(
+	[iId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[EquipoxCompetencia]  WITH CHECK ADD  CONSTRAINT [FK_EquipoxCompetencia_Competencia] FOREIGN KEY([iIdCompetencia])
+REFERENCES [dbo].[Competencia] ([iId])
+GO
+
+ALTER TABLE [dbo].[EquipoxCompetencia] CHECK CONSTRAINT [FK_EquipoxCompetencia_Competencia]
+GO
+
+ALTER TABLE [dbo].[EquipoxCompetencia]  WITH CHECK ADD  CONSTRAINT [FK_EquipoxCompetencia_Equipo] FOREIGN KEY([iIdEquipo])
+REFERENCES [dbo].[Equipo] ([iIdEquipo])
+GO
+
+ALTER TABLE [dbo].[EquipoxCompetencia] CHECK CONSTRAINT [FK_EquipoxCompetencia_Equipo]
+GO
+--------------------------------------
+
+USE [FSean]
+GO
+
+/****** Object:  Table [dbo].[Roles]    Script Date: 11/7/2019 11:05:34 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Roles](
+	[iId] [int] IDENTITY(1,1) NOT NULL,
+	[vRol] [varchar](50) NULL,
+ CONSTRAINT [PK_Roles_1] PRIMARY KEY CLUSTERED 
+(
+	[iId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+-------------------------------
+USE [FSean]
+GO
+
+/****** Object:  Table [dbo].[Usuario]    Script Date: 11/7/2019 11:06:13 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Usuario](
+	[iId] [int] IDENTITY(1,1) NOT NULL,
+	[iRol] [int] NULL,
+	[vUsuario] [varchar](200) NULL,
+	[vContraseña] [varchar](200) NULL,
+	[iIdRol] [int] NULL,
+	[vNombre] [varchar](200) NULL,
+	[vCorreo] [varchar](200) NULL,
+	[vIdentificacion] [varchar](200) NULL,
+	[dtFechaNacimiento] [datetime] NULL,
+	[iTelefono] [int] NULL,
+	[bAdmin] [int] NULL,
+ CONSTRAINT [PK_Usuario] PRIMARY KEY CLUSTERED 
+(
+	[iId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Usuario]  WITH CHECK ADD  CONSTRAINT [FK_Usuario_Usuario] FOREIGN KEY([iRol])
+REFERENCES [dbo].[Roles] ([iId])
+GO
+
+ALTER TABLE [dbo].[Usuario] CHECK CONSTRAINT [FK_Usuario_Usuario]
+GO
+
+
+
