@@ -1,0 +1,95 @@
+﻿@model IEnumerable<FSean.Models.Voluntario>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.vLugarTrabajo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.vAreaConocimiento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.bAntiguedad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.iRoles)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.vExperienciaPasada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.vSugerencias)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.vArea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.iCategoria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.vEncargado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.bJuez)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.vLugarTrabajo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.vAreaConocimiento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.bAntiguedad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.iRoles)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.vExperienciaPasada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.vSugerencias)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.vArea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.iCategoria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.vEncargado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.bJuez)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.iId }) |
+                @Html.ActionLink("Details", "Details", new { id=item.iId }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.iId })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

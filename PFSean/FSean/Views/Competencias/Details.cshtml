@@ -1,0 +1,50 @@
+﻿@model FSean.Models.Competencia
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Competencia</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.vDescripcion)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.vDescripcion)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.dtFechaInicio)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.dtFechaInicio)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.dtFechaFinal)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.dtFechaFinal)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.iId }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

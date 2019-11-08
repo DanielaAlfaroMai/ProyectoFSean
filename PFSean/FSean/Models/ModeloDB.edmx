@@ -1,0 +1,941 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FSeanModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Capacitacion">
+          <Key>
+            <PropertyRef Name="iId" />
+          </Key>
+          <Property Name="iId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="vNombre" Type="varchar" MaxLength="200" />
+          <Property Name="vDescripcion" Type="varchar" MaxLength="200" />
+          <Property Name="dtFechaInicio" Type="datetime" />
+          <Property Name="dtFechaFinal" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CapacitacionxVoluntario">
+          <Key>
+            <PropertyRef Name="iId" />
+          </Key>
+          <Property Name="iId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iIdCapacitacion" Type="int" />
+          <Property Name="iIdVoluntario" Type="int" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="iId" />
+          </Key>
+          <Property Name="iId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="vNombre" Type="varchar" MaxLength="200" />
+          <Property Name="vDescripcion" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="CategoriaxEquipo">
+          <Key>
+            <PropertyRef Name="iId" />
+          </Key>
+          <Property Name="iId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iIdCategoria" Type="int" Nullable="false" />
+          <Property Name="iIdEquipo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Competencia">
+          <Key>
+            <PropertyRef Name="iId" />
+          </Key>
+          <Property Name="iId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="vDescripcion" Type="varchar" MaxLength="500" />
+          <Property Name="dtFechaInicio" Type="datetime" />
+          <Property Name="dtFechaFinal" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Equipo">
+          <Key>
+            <PropertyRef Name="iIdEquipo" />
+          </Key>
+          <Property Name="iIdEquipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="vInstitucion" Type="varchar" MaxLength="200" />
+          <Property Name="iPaqueteInscripcion" Type="int" />
+        </EntityType>
+        <EntityType Name="EquipoxCompetencia">
+          <Key>
+            <PropertyRef Name="iId" />
+          </Key>
+          <Property Name="iId" Type="int" Nullable="false" />
+          <Property Name="iIdEquipo" Type="int" />
+          <Property Name="iIdCompetencia" Type="int" />
+        </EntityType>
+        <EntityType Name="Orden">
+          <Key>
+            <PropertyRef Name="iId" />
+          </Key>
+          <Property Name="iId" Type="int" Nullable="false" />
+          <Property Name="iIdUsuario" Type="int" />
+          <Property Name="iIdProducto" Type="int" />
+          <Property Name="iCantidad" Type="int" />
+          <Property Name="dcPrecioFinal" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Participante">
+          <Key>
+            <PropertyRef Name="iIdPartcipante" />
+          </Key>
+          <Property Name="iIdPartcipante" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iEquipo" Type="int" />
+          <Property Name="bEntrenador" Type="bit" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="iId" />
+          </Key>
+          <Property Name="iId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="vCategoria" Type="varchar" MaxLength="200" />
+          <Property Name="vNombre" Type="varchar" MaxLength="200" />
+          <Property Name="vCodigo" Type="varchar" MaxLength="200" />
+          <Property Name="vDescripcion" Type="varchar" MaxLength="200" />
+          <Property Name="iCantidad" Type="int" />
+          <Property Name="dcPrecio" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="imImagen" Type="image" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="iId" />
+          </Key>
+          <Property Name="iId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="vRol" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="iId" />
+          </Key>
+          <Property Name="iId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iRol" Type="int" />
+          <Property Name="vUsuario" Type="varchar" MaxLength="200" />
+          <Property Name="vContraseña" Type="varchar" MaxLength="200" />
+          <Property Name="iIdRol" Type="int" />
+          <Property Name="vNombre" Type="varchar" MaxLength="200" />
+          <Property Name="vCorreo" Type="varchar" MaxLength="200" />
+          <Property Name="vIdentificacion" Type="varchar" MaxLength="200" />
+          <Property Name="dtFechaNacimiento" Type="datetime" />
+          <Property Name="iTelefono" Type="int" />
+          <Property Name="bAdmin" Type="int" />
+        </EntityType>
+        <EntityType Name="Voluntario">
+          <Key>
+            <PropertyRef Name="iId" />
+          </Key>
+          <Property Name="iId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="vLugarTrabajo" Type="varchar" MaxLength="200" />
+          <Property Name="vAreaConocimiento" Type="varchar" MaxLength="200" />
+          <Property Name="bAntiguedad" Type="bit" />
+          <Property Name="iRoles" Type="int" />
+          <Property Name="vExperienciaPasada" Type="varchar" MaxLength="500" />
+          <Property Name="vSugerencias" Type="varchar" MaxLength="500" />
+          <Property Name="vArea" Type="varchar" MaxLength="50" />
+          <Property Name="iCategoria" Type="int" />
+          <Property Name="vEncargado" Type="varchar" MaxLength="200" />
+          <Property Name="bJuez" Type="bit" />
+        </EntityType>
+        <EntityType Name="VoluntarioxCompetencia">
+          <Key>
+            <PropertyRef Name="iId" />
+          </Key>
+          <Property Name="iId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iIdVoluntario" Type="int" />
+          <Property Name="iIdCompetencia" Type="int" />
+        </EntityType>
+        <Association Name="FK_CapacitacionxVoluntario_Capacitacion">
+          <End Role="Capacitacion" Type="Self.Capacitacion" Multiplicity="0..1" />
+          <End Role="CapacitacionxVoluntario" Type="Self.CapacitacionxVoluntario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Capacitacion">
+              <PropertyRef Name="iId" />
+            </Principal>
+            <Dependent Role="CapacitacionxVoluntario">
+              <PropertyRef Name="iIdCapacitacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CapacitacionxVoluntario_CapacitacionxVoluntario">
+          <End Role="Voluntario" Type="Self.Voluntario" Multiplicity="0..1" />
+          <End Role="CapacitacionxVoluntario" Type="Self.CapacitacionxVoluntario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Voluntario">
+              <PropertyRef Name="iId" />
+            </Principal>
+            <Dependent Role="CapacitacionxVoluntario">
+              <PropertyRef Name="iIdVoluntario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoriaxEquipo_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="CategoriaxEquipo" Type="Self.CategoriaxEquipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="iId" />
+            </Principal>
+            <Dependent Role="CategoriaxEquipo">
+              <PropertyRef Name="iIdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoriaxEquipo_Equipo">
+          <End Role="Equipo" Type="Self.Equipo" Multiplicity="1" />
+          <End Role="CategoriaxEquipo" Type="Self.CategoriaxEquipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipo">
+              <PropertyRef Name="iIdEquipo" />
+            </Principal>
+            <Dependent Role="CategoriaxEquipo">
+              <PropertyRef Name="iIdEquipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EquipoxCompetencia_Competencia">
+          <End Role="Competencia" Type="Self.Competencia" Multiplicity="0..1" />
+          <End Role="EquipoxCompetencia" Type="Self.EquipoxCompetencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competencia">
+              <PropertyRef Name="iId" />
+            </Principal>
+            <Dependent Role="EquipoxCompetencia">
+              <PropertyRef Name="iIdCompetencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EquipoxCompetencia_Equipo">
+          <End Role="Equipo" Type="Self.Equipo" Multiplicity="0..1" />
+          <End Role="EquipoxCompetencia" Type="Self.EquipoxCompetencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipo">
+              <PropertyRef Name="iIdEquipo" />
+            </Principal>
+            <Dependent Role="EquipoxCompetencia">
+              <PropertyRef Name="iIdEquipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orden_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
+          <End Role="Orden" Type="Self.Orden" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="iId" />
+            </Principal>
+            <Dependent Role="Orden">
+              <PropertyRef Name="iIdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orden_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Orden" Type="Self.Orden" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="iId" />
+            </Principal>
+            <Dependent Role="Orden">
+              <PropertyRef Name="iIdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Participante_Equipo">
+          <End Role="Equipo" Type="Self.Equipo" Multiplicity="0..1" />
+          <End Role="Participante" Type="Self.Participante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipo">
+              <PropertyRef Name="iIdEquipo" />
+            </Principal>
+            <Dependent Role="Participante">
+              <PropertyRef Name="iEquipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="iId" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="iCantidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Usuario">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="iId" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="iRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VoluntarioxCompetencia_Competencia">
+          <End Role="Competencia" Type="Self.Competencia" Multiplicity="0..1" />
+          <End Role="VoluntarioxCompetencia" Type="Self.VoluntarioxCompetencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competencia">
+              <PropertyRef Name="iId" />
+            </Principal>
+            <Dependent Role="VoluntarioxCompetencia">
+              <PropertyRef Name="iIdCompetencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VoluntarioxCompetencia_Voluntario">
+          <End Role="Voluntario" Type="Self.Voluntario" Multiplicity="0..1" />
+          <End Role="VoluntarioxCompetencia" Type="Self.VoluntarioxCompetencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Voluntario">
+              <PropertyRef Name="iId" />
+            </Principal>
+            <Dependent Role="VoluntarioxCompetencia">
+              <PropertyRef Name="iIdVoluntario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FSeanModelStoreContainer">
+          <EntitySet Name="Capacitacion" EntityType="Self.Capacitacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CapacitacionxVoluntario" EntityType="Self.CapacitacionxVoluntario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategoriaxEquipo" EntityType="Self.CategoriaxEquipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Competencia" EntityType="Self.Competencia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Equipo" EntityType="Self.Equipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EquipoxCompetencia" EntityType="Self.EquipoxCompetencia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orden" EntityType="Self.Orden" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Participante" EntityType="Self.Participante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Voluntario" EntityType="Self.Voluntario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VoluntarioxCompetencia" EntityType="Self.VoluntarioxCompetencia" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CapacitacionxVoluntario_Capacitacion" Association="Self.FK_CapacitacionxVoluntario_Capacitacion">
+            <End Role="Capacitacion" EntitySet="Capacitacion" />
+            <End Role="CapacitacionxVoluntario" EntitySet="CapacitacionxVoluntario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CapacitacionxVoluntario_CapacitacionxVoluntario" Association="Self.FK_CapacitacionxVoluntario_CapacitacionxVoluntario">
+            <End Role="Voluntario" EntitySet="Voluntario" />
+            <End Role="CapacitacionxVoluntario" EntitySet="CapacitacionxVoluntario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoriaxEquipo_Categoria" Association="Self.FK_CategoriaxEquipo_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="CategoriaxEquipo" EntitySet="CategoriaxEquipo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoriaxEquipo_Equipo" Association="Self.FK_CategoriaxEquipo_Equipo">
+            <End Role="Equipo" EntitySet="Equipo" />
+            <End Role="CategoriaxEquipo" EntitySet="CategoriaxEquipo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EquipoxCompetencia_Competencia" Association="Self.FK_EquipoxCompetencia_Competencia">
+            <End Role="Competencia" EntitySet="Competencia" />
+            <End Role="EquipoxCompetencia" EntitySet="EquipoxCompetencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EquipoxCompetencia_Equipo" Association="Self.FK_EquipoxCompetencia_Equipo">
+            <End Role="Equipo" EntitySet="Equipo" />
+            <End Role="EquipoxCompetencia" EntitySet="EquipoxCompetencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orden_Producto" Association="Self.FK_Orden_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="Orden" EntitySet="Orden" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orden_Usuario" Association="Self.FK_Orden_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Orden" EntitySet="Orden" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Participante_Equipo" Association="Self.FK_Participante_Equipo">
+            <End Role="Equipo" EntitySet="Equipo" />
+            <End Role="Participante" EntitySet="Participante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Categoria" Association="Self.FK_Producto_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Usuario" Association="Self.FK_Usuario_Usuario">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VoluntarioxCompetencia_Competencia" Association="Self.FK_VoluntarioxCompetencia_Competencia">
+            <End Role="Competencia" EntitySet="Competencia" />
+            <End Role="VoluntarioxCompetencia" EntitySet="VoluntarioxCompetencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VoluntarioxCompetencia_Voluntario" Association="Self.FK_VoluntarioxCompetencia_Voluntario">
+            <End Role="Voluntario" EntitySet="Voluntario" />
+            <End Role="VoluntarioxCompetencia" EntitySet="VoluntarioxCompetencia" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FSeanModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Capacitacion">
+          <Key>
+            <PropertyRef Name="iId" />
+          </Key>
+          <Property Name="iId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="vNombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="vDescripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="dtFechaInicio" Type="DateTime" Precision="3" />
+          <Property Name="dtFechaFinal" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CapacitacionxVoluntario" Relationship="Self.FK_CapacitacionxVoluntario_Capacitacion" FromRole="Capacitacion" ToRole="CapacitacionxVoluntario" />
+        </EntityType>
+        <EntityType Name="CapacitacionxVoluntario">
+          <Key>
+            <PropertyRef Name="iId" />
+          </Key>
+          <Property Name="iId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="iIdCapacitacion" Type="Int32" />
+          <Property Name="iIdVoluntario" Type="Int32" />
+          <NavigationProperty Name="Capacitacion" Relationship="Self.FK_CapacitacionxVoluntario_Capacitacion" FromRole="CapacitacionxVoluntario" ToRole="Capacitacion" />
+          <NavigationProperty Name="Voluntario" Relationship="Self.FK_CapacitacionxVoluntario_CapacitacionxVoluntario" FromRole="CapacitacionxVoluntario" ToRole="Voluntario" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="iId" />
+          </Key>
+          <Property Name="iId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="vNombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="vDescripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CategoriaxEquipo" Relationship="Self.FK_CategoriaxEquipo_Categoria" FromRole="Categoria" ToRole="CategoriaxEquipo" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_Producto_Categoria" FromRole="Categoria" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="CategoriaxEquipo">
+          <Key>
+            <PropertyRef Name="iId" />
+          </Key>
+          <Property Name="iId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="iIdCategoria" Type="Int32" Nullable="false" />
+          <Property Name="iIdEquipo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Categoria" Relationship="Self.FK_CategoriaxEquipo_Categoria" FromRole="CategoriaxEquipo" ToRole="Categoria" />
+          <NavigationProperty Name="Equipo" Relationship="Self.FK_CategoriaxEquipo_Equipo" FromRole="CategoriaxEquipo" ToRole="Equipo" />
+        </EntityType>
+        <EntityType Name="Competencia">
+          <Key>
+            <PropertyRef Name="iId" />
+          </Key>
+          <Property Name="iId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="vDescripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="dtFechaInicio" Type="DateTime" Precision="3" />
+          <Property Name="dtFechaFinal" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="EquipoxCompetencia" Relationship="Self.FK_EquipoxCompetencia_Competencia" FromRole="Competencia" ToRole="EquipoxCompetencia" />
+          <NavigationProperty Name="VoluntarioxCompetencia" Relationship="Self.FK_VoluntarioxCompetencia_Competencia" FromRole="Competencia" ToRole="VoluntarioxCompetencia" />
+        </EntityType>
+        <EntityType Name="Equipo">
+          <Key>
+            <PropertyRef Name="iIdEquipo" />
+          </Key>
+          <Property Name="iIdEquipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="vInstitucion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="iPaqueteInscripcion" Type="Int32" />
+          <NavigationProperty Name="CategoriaxEquipo" Relationship="Self.FK_CategoriaxEquipo_Equipo" FromRole="Equipo" ToRole="CategoriaxEquipo" />
+          <NavigationProperty Name="EquipoxCompetencia" Relationship="Self.FK_EquipoxCompetencia_Equipo" FromRole="Equipo" ToRole="EquipoxCompetencia" />
+          <NavigationProperty Name="Participante" Relationship="Self.FK_Participante_Equipo" FromRole="Equipo" ToRole="Participante" />
+        </EntityType>
+        <EntityType Name="EquipoxCompetencia">
+          <Key>
+            <PropertyRef Name="iId" />
+          </Key>
+          <Property Name="iId" Type="Int32" Nullable="false" />
+          <Property Name="iIdEquipo" Type="Int32" />
+          <Property Name="iIdCompetencia" Type="Int32" />
+          <NavigationProperty Name="Competencia" Relationship="Self.FK_EquipoxCompetencia_Competencia" FromRole="EquipoxCompetencia" ToRole="Competencia" />
+          <NavigationProperty Name="Equipo" Relationship="Self.FK_EquipoxCompetencia_Equipo" FromRole="EquipoxCompetencia" ToRole="Equipo" />
+        </EntityType>
+        <EntityType Name="Orden">
+          <Key>
+            <PropertyRef Name="iId" />
+          </Key>
+          <Property Name="iId" Type="Int32" Nullable="false" />
+          <Property Name="iIdUsuario" Type="Int32" />
+          <Property Name="iIdProducto" Type="Int32" />
+          <Property Name="iCantidad" Type="Int32" />
+          <Property Name="dcPrecioFinal" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_Orden_Producto" FromRole="Orden" ToRole="Producto" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Orden_Usuario" FromRole="Orden" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Participante">
+          <Key>
+            <PropertyRef Name="iIdPartcipante" />
+          </Key>
+          <Property Name="iIdPartcipante" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="iEquipo" Type="Int32" />
+          <Property Name="bEntrenador" Type="Boolean" />
+          <NavigationProperty Name="Equipo" Relationship="Self.FK_Participante_Equipo" FromRole="Participante" ToRole="Equipo" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="iId" />
+          </Key>
+          <Property Name="iId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="vCategoria" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="vNombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="vCodigo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="vDescripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="iCantidad" Type="Int32" />
+          <Property Name="dcPrecio" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="imImagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Categoria" Relationship="Self.FK_Producto_Categoria" FromRole="Producto" ToRole="Categoria" />
+          <NavigationProperty Name="Orden" Relationship="Self.FK_Orden_Producto" FromRole="Producto" ToRole="Orden" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="iId" />
+          </Key>
+          <Property Name="iId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="vRol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_Usuario" FromRole="Roles" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="iId" />
+          </Key>
+          <Property Name="iId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="iRol" Type="Int32" />
+          <Property Name="vUsuario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="vContraseña" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="iIdRol" Type="Int32" />
+          <Property Name="vNombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="vCorreo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="vIdentificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="dtFechaNacimiento" Type="DateTime" Precision="3" />
+          <Property Name="iTelefono" Type="Int32" />
+          <Property Name="bAdmin" Type="Int32" />
+          <NavigationProperty Name="Orden" Relationship="Self.FK_Orden_Usuario" FromRole="Usuario" ToRole="Orden" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK_Usuario_Usuario" FromRole="Usuario" ToRole="Roles" />
+        </EntityType>
+        <EntityType Name="Voluntario">
+          <Key>
+            <PropertyRef Name="iId" />
+          </Key>
+          <Property Name="iId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="vLugarTrabajo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="vAreaConocimiento" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="bAntiguedad" Type="Boolean" />
+          <Property Name="iRoles" Type="Int32" />
+          <Property Name="vExperienciaPasada" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="vSugerencias" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="vArea" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="iCategoria" Type="Int32" />
+          <Property Name="vEncargado" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="bJuez" Type="Boolean" />
+          <NavigationProperty Name="CapacitacionxVoluntario" Relationship="Self.FK_CapacitacionxVoluntario_CapacitacionxVoluntario" FromRole="Voluntario" ToRole="CapacitacionxVoluntario" />
+          <NavigationProperty Name="VoluntarioxCompetencia" Relationship="Self.FK_VoluntarioxCompetencia_Voluntario" FromRole="Voluntario" ToRole="VoluntarioxCompetencia" />
+        </EntityType>
+        <EntityType Name="VoluntarioxCompetencia">
+          <Key>
+            <PropertyRef Name="iId" />
+          </Key>
+          <Property Name="iId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="iIdVoluntario" Type="Int32" />
+          <Property Name="iIdCompetencia" Type="Int32" />
+          <NavigationProperty Name="Competencia" Relationship="Self.FK_VoluntarioxCompetencia_Competencia" FromRole="VoluntarioxCompetencia" ToRole="Competencia" />
+          <NavigationProperty Name="Voluntario" Relationship="Self.FK_VoluntarioxCompetencia_Voluntario" FromRole="VoluntarioxCompetencia" ToRole="Voluntario" />
+        </EntityType>
+        <Association Name="FK_CapacitacionxVoluntario_Capacitacion">
+          <End Role="Capacitacion" Type="Self.Capacitacion" Multiplicity="0..1" />
+          <End Role="CapacitacionxVoluntario" Type="Self.CapacitacionxVoluntario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Capacitacion">
+              <PropertyRef Name="iId" />
+            </Principal>
+            <Dependent Role="CapacitacionxVoluntario">
+              <PropertyRef Name="iIdCapacitacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CapacitacionxVoluntario_CapacitacionxVoluntario">
+          <End Role="Voluntario" Type="Self.Voluntario" Multiplicity="0..1" />
+          <End Role="CapacitacionxVoluntario" Type="Self.CapacitacionxVoluntario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Voluntario">
+              <PropertyRef Name="iId" />
+            </Principal>
+            <Dependent Role="CapacitacionxVoluntario">
+              <PropertyRef Name="iIdVoluntario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoriaxEquipo_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="CategoriaxEquipo" Type="Self.CategoriaxEquipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="iId" />
+            </Principal>
+            <Dependent Role="CategoriaxEquipo">
+              <PropertyRef Name="iIdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="iId" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="iCantidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoriaxEquipo_Equipo">
+          <End Role="Equipo" Type="Self.Equipo" Multiplicity="1" />
+          <End Role="CategoriaxEquipo" Type="Self.CategoriaxEquipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipo">
+              <PropertyRef Name="iIdEquipo" />
+            </Principal>
+            <Dependent Role="CategoriaxEquipo">
+              <PropertyRef Name="iIdEquipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EquipoxCompetencia_Competencia">
+          <End Role="Competencia" Type="Self.Competencia" Multiplicity="0..1" />
+          <End Role="EquipoxCompetencia" Type="Self.EquipoxCompetencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competencia">
+              <PropertyRef Name="iId" />
+            </Principal>
+            <Dependent Role="EquipoxCompetencia">
+              <PropertyRef Name="iIdCompetencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VoluntarioxCompetencia_Competencia">
+          <End Role="Competencia" Type="Self.Competencia" Multiplicity="0..1" />
+          <End Role="VoluntarioxCompetencia" Type="Self.VoluntarioxCompetencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competencia">
+              <PropertyRef Name="iId" />
+            </Principal>
+            <Dependent Role="VoluntarioxCompetencia">
+              <PropertyRef Name="iIdCompetencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EquipoxCompetencia_Equipo">
+          <End Role="Equipo" Type="Self.Equipo" Multiplicity="0..1" />
+          <End Role="EquipoxCompetencia" Type="Self.EquipoxCompetencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipo">
+              <PropertyRef Name="iIdEquipo" />
+            </Principal>
+            <Dependent Role="EquipoxCompetencia">
+              <PropertyRef Name="iIdEquipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Participante_Equipo">
+          <End Role="Equipo" Type="Self.Equipo" Multiplicity="0..1" />
+          <End Role="Participante" Type="Self.Participante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipo">
+              <PropertyRef Name="iIdEquipo" />
+            </Principal>
+            <Dependent Role="Participante">
+              <PropertyRef Name="iEquipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orden_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
+          <End Role="Orden" Type="Self.Orden" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="iId" />
+            </Principal>
+            <Dependent Role="Orden">
+              <PropertyRef Name="iIdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orden_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Orden" Type="Self.Orden" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="iId" />
+            </Principal>
+            <Dependent Role="Orden">
+              <PropertyRef Name="iIdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Usuario">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="iId" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="iRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VoluntarioxCompetencia_Voluntario">
+          <End Role="Voluntario" Type="Self.Voluntario" Multiplicity="0..1" />
+          <End Role="VoluntarioxCompetencia" Type="Self.VoluntarioxCompetencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Voluntario">
+              <PropertyRef Name="iId" />
+            </Principal>
+            <Dependent Role="VoluntarioxCompetencia">
+              <PropertyRef Name="iIdVoluntario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FSeanDB" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Capacitacion" EntityType="Self.Capacitacion" />
+          <EntitySet Name="CapacitacionxVoluntario" EntityType="Self.CapacitacionxVoluntario" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" />
+          <EntitySet Name="CategoriaxEquipo" EntityType="Self.CategoriaxEquipo" />
+          <EntitySet Name="Competencia" EntityType="Self.Competencia" />
+          <EntitySet Name="Equipo" EntityType="Self.Equipo" />
+          <EntitySet Name="EquipoxCompetencia" EntityType="Self.EquipoxCompetencia" />
+          <EntitySet Name="Orden" EntityType="Self.Orden" />
+          <EntitySet Name="Participante" EntityType="Self.Participante" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <EntitySet Name="Voluntario" EntityType="Self.Voluntario" />
+          <EntitySet Name="VoluntarioxCompetencia" EntityType="Self.VoluntarioxCompetencia" />
+          <AssociationSet Name="FK_CapacitacionxVoluntario_Capacitacion" Association="Self.FK_CapacitacionxVoluntario_Capacitacion">
+            <End Role="Capacitacion" EntitySet="Capacitacion" />
+            <End Role="CapacitacionxVoluntario" EntitySet="CapacitacionxVoluntario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CapacitacionxVoluntario_CapacitacionxVoluntario" Association="Self.FK_CapacitacionxVoluntario_CapacitacionxVoluntario">
+            <End Role="Voluntario" EntitySet="Voluntario" />
+            <End Role="CapacitacionxVoluntario" EntitySet="CapacitacionxVoluntario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoriaxEquipo_Categoria" Association="Self.FK_CategoriaxEquipo_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="CategoriaxEquipo" EntitySet="CategoriaxEquipo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Categoria" Association="Self.FK_Producto_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoriaxEquipo_Equipo" Association="Self.FK_CategoriaxEquipo_Equipo">
+            <End Role="Equipo" EntitySet="Equipo" />
+            <End Role="CategoriaxEquipo" EntitySet="CategoriaxEquipo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EquipoxCompetencia_Competencia" Association="Self.FK_EquipoxCompetencia_Competencia">
+            <End Role="Competencia" EntitySet="Competencia" />
+            <End Role="EquipoxCompetencia" EntitySet="EquipoxCompetencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VoluntarioxCompetencia_Competencia" Association="Self.FK_VoluntarioxCompetencia_Competencia">
+            <End Role="Competencia" EntitySet="Competencia" />
+            <End Role="VoluntarioxCompetencia" EntitySet="VoluntarioxCompetencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EquipoxCompetencia_Equipo" Association="Self.FK_EquipoxCompetencia_Equipo">
+            <End Role="Equipo" EntitySet="Equipo" />
+            <End Role="EquipoxCompetencia" EntitySet="EquipoxCompetencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Participante_Equipo" Association="Self.FK_Participante_Equipo">
+            <End Role="Equipo" EntitySet="Equipo" />
+            <End Role="Participante" EntitySet="Participante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orden_Producto" Association="Self.FK_Orden_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="Orden" EntitySet="Orden" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orden_Usuario" Association="Self.FK_Orden_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Orden" EntitySet="Orden" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Usuario" Association="Self.FK_Usuario_Usuario">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VoluntarioxCompetencia_Voluntario" Association="Self.FK_VoluntarioxCompetencia_Voluntario">
+            <End Role="Voluntario" EntitySet="Voluntario" />
+            <End Role="VoluntarioxCompetencia" EntitySet="VoluntarioxCompetencia" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FSeanModelStoreContainer" CdmEntityContainer="FSeanDB">
+          <EntitySetMapping Name="Capacitacion">
+            <EntityTypeMapping TypeName="FSeanModel.Capacitacion">
+              <MappingFragment StoreEntitySet="Capacitacion">
+                <ScalarProperty Name="iId" ColumnName="iId" />
+                <ScalarProperty Name="vNombre" ColumnName="vNombre" />
+                <ScalarProperty Name="vDescripcion" ColumnName="vDescripcion" />
+                <ScalarProperty Name="dtFechaInicio" ColumnName="dtFechaInicio" />
+                <ScalarProperty Name="dtFechaFinal" ColumnName="dtFechaFinal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CapacitacionxVoluntario">
+            <EntityTypeMapping TypeName="FSeanModel.CapacitacionxVoluntario">
+              <MappingFragment StoreEntitySet="CapacitacionxVoluntario">
+                <ScalarProperty Name="iId" ColumnName="iId" />
+                <ScalarProperty Name="iIdCapacitacion" ColumnName="iIdCapacitacion" />
+                <ScalarProperty Name="iIdVoluntario" ColumnName="iIdVoluntario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categoria">
+            <EntityTypeMapping TypeName="FSeanModel.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="iId" ColumnName="iId" />
+                <ScalarProperty Name="vNombre" ColumnName="vNombre" />
+                <ScalarProperty Name="vDescripcion" ColumnName="vDescripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoriaxEquipo">
+            <EntityTypeMapping TypeName="FSeanModel.CategoriaxEquipo">
+              <MappingFragment StoreEntitySet="CategoriaxEquipo">
+                <ScalarProperty Name="iId" ColumnName="iId" />
+                <ScalarProperty Name="iIdCategoria" ColumnName="iIdCategoria" />
+                <ScalarProperty Name="iIdEquipo" ColumnName="iIdEquipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Competencia">
+            <EntityTypeMapping TypeName="FSeanModel.Competencia">
+              <MappingFragment StoreEntitySet="Competencia">
+                <ScalarProperty Name="iId" ColumnName="iId" />
+                <ScalarProperty Name="vDescripcion" ColumnName="vDescripcion" />
+                <ScalarProperty Name="dtFechaInicio" ColumnName="dtFechaInicio" />
+                <ScalarProperty Name="dtFechaFinal" ColumnName="dtFechaFinal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equipo">
+            <EntityTypeMapping TypeName="FSeanModel.Equipo">
+              <MappingFragment StoreEntitySet="Equipo">
+                <ScalarProperty Name="iIdEquipo" ColumnName="iIdEquipo" />
+                <ScalarProperty Name="vInstitucion" ColumnName="vInstitucion" />
+                <ScalarProperty Name="iPaqueteInscripcion" ColumnName="iPaqueteInscripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EquipoxCompetencia">
+            <EntityTypeMapping TypeName="FSeanModel.EquipoxCompetencia">
+              <MappingFragment StoreEntitySet="EquipoxCompetencia">
+                <ScalarProperty Name="iId" ColumnName="iId" />
+                <ScalarProperty Name="iIdEquipo" ColumnName="iIdEquipo" />
+                <ScalarProperty Name="iIdCompetencia" ColumnName="iIdCompetencia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orden">
+            <EntityTypeMapping TypeName="FSeanModel.Orden">
+              <MappingFragment StoreEntitySet="Orden">
+                <ScalarProperty Name="iId" ColumnName="iId" />
+                <ScalarProperty Name="iIdUsuario" ColumnName="iIdUsuario" />
+                <ScalarProperty Name="iIdProducto" ColumnName="iIdProducto" />
+                <ScalarProperty Name="iCantidad" ColumnName="iCantidad" />
+                <ScalarProperty Name="dcPrecioFinal" ColumnName="dcPrecioFinal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Participante">
+            <EntityTypeMapping TypeName="FSeanModel.Participante">
+              <MappingFragment StoreEntitySet="Participante">
+                <ScalarProperty Name="iIdPartcipante" ColumnName="iIdPartcipante" />
+                <ScalarProperty Name="iEquipo" ColumnName="iEquipo" />
+                <ScalarProperty Name="bEntrenador" ColumnName="bEntrenador" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Producto">
+            <EntityTypeMapping TypeName="FSeanModel.Producto">
+              <MappingFragment StoreEntitySet="Producto">
+                <ScalarProperty Name="iId" ColumnName="iId" />
+                <ScalarProperty Name="vCategoria" ColumnName="vCategoria" />
+                <ScalarProperty Name="vNombre" ColumnName="vNombre" />
+                <ScalarProperty Name="vCodigo" ColumnName="vCodigo" />
+                <ScalarProperty Name="vDescripcion" ColumnName="vDescripcion" />
+                <ScalarProperty Name="iCantidad" ColumnName="iCantidad" />
+                <ScalarProperty Name="dcPrecio" ColumnName="dcPrecio" />
+                <ScalarProperty Name="imImagen" ColumnName="imImagen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="FSeanModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="iId" ColumnName="iId" />
+                <ScalarProperty Name="vRol" ColumnName="vRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="FSeanModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="iId" ColumnName="iId" />
+                <ScalarProperty Name="iRol" ColumnName="iRol" />
+                <ScalarProperty Name="vUsuario" ColumnName="vUsuario" />
+                <ScalarProperty Name="vContraseña" ColumnName="vContraseña" />
+                <ScalarProperty Name="iIdRol" ColumnName="iIdRol" />
+                <ScalarProperty Name="vNombre" ColumnName="vNombre" />
+                <ScalarProperty Name="vCorreo" ColumnName="vCorreo" />
+                <ScalarProperty Name="vIdentificacion" ColumnName="vIdentificacion" />
+                <ScalarProperty Name="dtFechaNacimiento" ColumnName="dtFechaNacimiento" />
+                <ScalarProperty Name="iTelefono" ColumnName="iTelefono" />
+                <ScalarProperty Name="bAdmin" ColumnName="bAdmin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Voluntario">
+            <EntityTypeMapping TypeName="FSeanModel.Voluntario">
+              <MappingFragment StoreEntitySet="Voluntario">
+                <ScalarProperty Name="iId" ColumnName="iId" />
+                <ScalarProperty Name="vLugarTrabajo" ColumnName="vLugarTrabajo" />
+                <ScalarProperty Name="vAreaConocimiento" ColumnName="vAreaConocimiento" />
+                <ScalarProperty Name="bAntiguedad" ColumnName="bAntiguedad" />
+                <ScalarProperty Name="iRoles" ColumnName="iRoles" />
+                <ScalarProperty Name="vExperienciaPasada" ColumnName="vExperienciaPasada" />
+                <ScalarProperty Name="vSugerencias" ColumnName="vSugerencias" />
+                <ScalarProperty Name="vArea" ColumnName="vArea" />
+                <ScalarProperty Name="iCategoria" ColumnName="iCategoria" />
+                <ScalarProperty Name="vEncargado" ColumnName="vEncargado" />
+                <ScalarProperty Name="bJuez" ColumnName="bJuez" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VoluntarioxCompetencia">
+            <EntityTypeMapping TypeName="FSeanModel.VoluntarioxCompetencia">
+              <MappingFragment StoreEntitySet="VoluntarioxCompetencia">
+                <ScalarProperty Name="iId" ColumnName="iId" />
+                <ScalarProperty Name="iIdVoluntario" ColumnName="iIdVoluntario" />
+                <ScalarProperty Name="iIdCompetencia" ColumnName="iIdCompetencia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

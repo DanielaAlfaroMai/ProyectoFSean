@@ -1,0 +1,77 @@
+﻿@model IEnumerable<FSean.Models.Producto>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.vCategoria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.vNombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.vCodigo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.vDescripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dcPrecio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.imImagen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categoria.vNombre)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.vCategoria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.vNombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.vCodigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.vDescripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dcPrecio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.imImagen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categoria.vNombre)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.iId }) |
+                @Html.ActionLink("Details", "Details", new { id=item.iId }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.iId })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>
